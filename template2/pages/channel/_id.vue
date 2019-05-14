@@ -12,6 +12,7 @@
             <router-link tag="li" to="/channel/6" active-class="active"><a>虚拟现实</a></router-link>
             <router-link tag="li" to="/channel/7" active-class="active"><a>商业预测</a></router-link>
             <router-link tag="li" to="/channel/8" active-class="active"><a>前端开发</a></router-link> -->
+            
             <router-link tag="li" to="/channel/0" active-class="active" exact><a>热门</a></router-link>
             <li v-for="(channel,index) in channels" :key="index" >
               <router-link :to="'/channel/'+channel.id" active-class="active">{{channel.name}}</router-link>
