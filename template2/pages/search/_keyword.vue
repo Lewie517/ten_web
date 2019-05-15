@@ -34,7 +34,7 @@
                 <li data-target="#myCarousel" data-slide-to="1"></li>
                 <li data-target="#myCarousel" data-slide-to="2"></li>
               </ol>
-              <div class="carousel-inner">
+              <!-- <div class="carousel-inner">
                 <div class="active item">
                   <img src="~/assets/img/widget-banner01.png">
                 </div>
@@ -44,12 +44,14 @@
                 <div class="item">
                   <img src="~/assets/img/widget-banner01.png">
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
 
           <!-- 文章开始 -->
-
+          <div>
+            <span style="width:100%;font-size:20px">结果: 找到 "{{this.keyword}}" 相关内容 {{this.count}} 个</span>
+          </div><br>
           <div class="data-list" v-infinite-scroll="loadMore">
             <ul class="headline fixed" id="headline">
               <!-- 循环 -->
@@ -99,11 +101,11 @@
               <img src="~/assets/img/widget-activity02.png" alt="活动一">
             </div>
           </div>
-          <div class="block-btn">
+          <!-- <div class="block-btn">
             <p>今天，有什么好东西要和大家分享么?</p>
-            <!-- <a class="sui-btn btn-block btn-share" href="/article/submit" target="_blank" >发布分享</a> -->
+            <a class="sui-btn btn-block btn-share" href="/article/submit" target="_blank" >发布分享</a>
             <button class="sui-btn btn-block btn-share" @click="toShare()">发布分享</button>
-          </div>
+          </div> -->
           
           <!-- <link rel="import" href=".~/assets/.~/assets/modules/ui-modules/footer/footer.html?__inline"> -->
         </div>
@@ -121,22 +123,25 @@ import axios from 'axios'
 export default {
   asyncData({ params }){
       //获取channelid
-    return axios.all([articleApi.findArticleByChannel(params.id,1,10),
+    return axios.all([articleApi.findArticleByCondition(1,10,{title:params.keyword}),
                     articleApi.findAllChannel()]).then(axios.spread(function(items,channels){
       return {
-        items : items.data.data,
+        count : items.data.data.total,
+        items : items.data.data.rows,
         channels : channels.data.data,
-        id: params.id
+        keyword: params.keyword
       }
     }))
   },
+  created(){
+  },
   data(){
     return {
-      // this1:this
       query:"",
       id:"",
       page:1,
-      param:""
+      keyword:''
+
     }
   },
   methods:{
@@ -156,8 +161,8 @@ export default {
     },
     loadMore(){
       this.page++
-      articleApi.findArticleByChannel(this.id,this.page,10).then(res=>{
-        this.items = this.items.concat(res.data.data)
+      articleApi.findArticleByCondition(this.page,10,{title:this.keyword}).then(res=>{
+        this.items = this.items.concat(res.data.data.rows)
       })
     }
     

@@ -57,6 +57,14 @@ export default {
             url: `/article/article/${channelid}/${page}/${size}`,
             method: 'get',
         })
+    },
+    //根据条件查询文章列表  /article/article/search/{page}/{size}
+    findArticleByCondition(page, size, searchMap){
+        return request({
+            url: `/${group_name}/${api_name}/search/${page}/${size}`,
+            method: 'post',
+            data: searchMap
+        })
     }
 
 

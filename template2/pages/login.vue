@@ -43,7 +43,7 @@
                   <label for="inputpassword" class="control-label">密码</label>
                   <div class="controls">
                     <input
-                      type="text"
+                      type="password"
                       id="inputpassword"
                       v-model="pojo.password"
                       placeholder="请输入6-16位密码"
@@ -88,7 +88,7 @@
           <div class="control-group">
             <label for="inputpassword" class="control-label">密码：</label>
             <div class="controls">
-              <input
+              <input 
                 type="password"
                 id="inputpassword"
                 v-model="password"
@@ -125,7 +125,7 @@ export default {
       password: "", // 密码
       remenberMe: false, // 记住我
       dialogVisible: false // 弹出框
-    };
+    }
   },
   methods: {
     sendsms() {
@@ -167,8 +167,22 @@ export default {
           message: response.data.message,
           type: response.data.flag ? "success" : "error",
           showClose: true
-        });
-      });
+        })
+      })
+      //清空数据
+      //pojo: {}, // 整个表单的实体对象
+      // code: "", // 验证码
+      // checked: false, // 是否同意服务条款
+      // mobile: "", // 手机号码
+      // password: "", // 密码
+      // remenberMe: false, // 记住我
+      // dialogVisible: false // 弹出框
+      this.pojo.nickname = ""
+      this.pojo.password = ""
+      this.pojo.mobile = ""
+      this.code = ""
+      this.checked = false
+
     },
     // 校验数据
     dataValidate() {

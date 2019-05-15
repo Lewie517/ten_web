@@ -133,6 +133,16 @@ i {
   color: #999;
 }
 
+.form .sui-form input[type="password"] {
+  height: 32px;
+  padding-left: 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: 'Microsoft Yahei';
+  box-shadow: none;
+  color: #999;
+}
+
 .form .sui-form .control-group {
   margin-bottom: 15px;
 }
@@ -186,7 +196,7 @@ i {
   margin-left: 8px;
 }
 
-.login-form .type-text {
+.login-form .type-text .type-password {
   font-size: 16px;
   font-family: 'icon-pc' ,'Microsoft Yahei';
   color: #666;

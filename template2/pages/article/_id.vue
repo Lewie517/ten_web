@@ -21,7 +21,7 @@
         <div class="answer-intro">
           <h4 class="answer-num">{{article.comment}}条评论</h4>
           <div class="comment-box">
-            <form class="comment-form sui-form form-inline">
+            <form class="comment-form sui-form form-inline"  @submit.prevent>
               <img src="~/assets/img/widget-photo.jpg" alt>
               <div class="input-prepend input-append input-box">
                 <input
@@ -29,10 +29,10 @@
                   type="text"
                   v-model="content"
                   class="span2 input-fat real-box"
-                  placeholder="写下你的评论">
+                  placeholder="写下你的评论" @keyup.enter="submitComment()">
                   <input id="articleid" type="hidden" v-model="articleid" />
                 <!-- <span class="add-on" @click="login" >提交</span> -->
-                <button type="button" class="add-on" @click="submitComment()">提交</button>
+                <button type="button" class="add-on" @click="submitComment()" >提交</button>
               </div>
             </form>
           </div>

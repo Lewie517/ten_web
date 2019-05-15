@@ -15,9 +15,10 @@
                 <router-link tag="li" to="/recruit" active-class="active"><a>招聘</a></router-link>
 
             </ul> 
-            <form class="sui-form sui-form pull-left"> 
-                <input type="text" placeholder="输入关键词..." /> 
-                <span class="btn-search fa fa-search"></span> 
+            <form class="sui-form sui-form pull-left" @submit.prevent> 
+                <input type="text" placeholder="输入文章标题查询..." v-model="keyword" @keyup.enter="searchEnterFun" /> 
+                <span class="btn-search fa fa-search" @click="search()"></span> 
+                <!-- <button type="button" class="btn-search fa fa-search" @click="search()"></button> -->
             </form> 
             <div class="sui-nav pull-right info" v-if="user.name!==undefined"> 
               <li><a href="/manager" class="notice">{{user.name}}</a></li>     
@@ -114,10 +115,12 @@ import "~/assets/css/page-sj-headline-login.css"
 import '~/assets/css/widget-base.css'
 import '~/assets/css/widget-head-foot.css'
 import {getUser,removeUser} from '@/utils/auth'
+import articleApi from '@/api/article'
 export default {
     data(){
         return {
-            user: {}
+            user: {},
+            keyword:""
         }
     },
     created(){
@@ -127,6 +130,19 @@ export default {
         logout(){
             removeUser()
             location.href='/'
+        },
+        search(){
+            // this.$router.push({path:'/search',query:{id:this.keyword}})
+            this.$router.push("/search/"+this.keyword)
+            this.keyword = ''
+        },
+        searchEnterFun(){
+            this.search()
+            // this.$router.push("/search/"+this.keyword)
+            // this.keyword = ''
+        },
+        nosubmit(){
+            return false;
         }
     }
 }
