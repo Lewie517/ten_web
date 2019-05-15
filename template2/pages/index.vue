@@ -67,7 +67,7 @@
                   <h5 class="author">
                     <div class="fl">
                       <span class="authorName">
-                        <img src="~/assets/img/widget-photo.png" alt>{{item.userid}}
+                        <img src="~/assets/img/widget-photo.png" alt>{{item.nickname}}
                       </span>
                       <span>{{item.createtime}}</span>
                     </div>
@@ -102,7 +102,7 @@
           <div class="block-btn">
             <p>今天，有什么好东西要和大家分享么?</p>
             <!-- <a class="sui-btn btn-block btn-share" href="/article/submit" target="_blank" >发布分享</a> -->
-            <button class="sui-btn btn-block btn-share" @click="toShare()">发布分享</button>
+            <button class="sui-btn btn-block btn-share" style="border-radius: 5px;" @click="toShare()">发布分享</button>
           </div>
           
           <!-- <link rel="import" href=".~/assets/.~/assets/modules/ui-modules/footer/footer.html?__inline"> -->

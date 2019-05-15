@@ -9,16 +9,16 @@
         <form class="sui-form form-horizontal">
           <div class="control-group">
             <div class="controls title-input">
-              <input type="text" id="inputEmail" style="width:570px;" v-model="title" placeholder="标题:不超过30个字符">&nbsp;
+              <input type="text" id="inputEmail" style="width:570px;border-radius: 5px;" v-model="title" placeholder="标题:不超过30个字符">&nbsp;
               频道:
-              <select v-model="channelid" style="width:106px;height:32px">
-                <option v-for="(item,index) in items" :key="index" :value="item.id">{{item.name}}</option>
+              <select v-model="channelid" style="width:106px;height:32px;border-radius: 5px;" >
+                <option style="border-radius: 5px;" v-for="(item,index) in items" :key="index" :value="item.id">{{item.name}}</option>
               </select>
             </div>
           </div>
 
           <div class="editor">
-            <textarea name="editor1" style="width:723px;height:186px" v-model="content" placeholder="内容"></textarea>
+            <textarea name="editor1" style="width:723px;height:186px;border-radius: 5px;" v-model="content" placeholder="内容" ></textarea>
             <!-- <input
               type="text"
               style="width:723px;height:186px;text-align=left;margin-left:8px;"

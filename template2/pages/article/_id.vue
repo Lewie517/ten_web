@@ -7,7 +7,7 @@
           <h2>{{article.title}}</h2>
           <div class="operate">
             <span class="fl author">
-              <strong>{{article.userid}}</strong> 发布于
+              <strong>{{article.nickname}}</strong> 发布于
               <span class="time">{{article.createtime}}</span>
             </span>
             <!-- <span class="fr ">收藏</span> -->
@@ -44,7 +44,7 @@
                 </div>
                 <div class="fl text">
                   <p class="author">
-                    <span class="name"><strong>{{comment.userid}}</strong></span> 
+                    <span class="name"><strong>{{comment.nickname}}</strong></span> 
                     发布于&nbsp;&nbsp;{{comment.publishdate}}
                   </p>
                   <p class="word" >

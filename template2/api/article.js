@@ -19,13 +19,13 @@ export default {
     },
     getComment(articleid){
         return request({
-            url: `/comment/${api_name}/${articleid}`,
+            url: `/${group_name}/comment/${api_name}/${articleid}`,
             method: 'get'
         })
     },
     submitComment(articleid,content){
         return request({
-            url: '/comment',
+            url: '/article/comment',
             method: 'post',
             data: {
                 articleid,
