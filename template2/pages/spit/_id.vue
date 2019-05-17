@@ -53,7 +53,7 @@
     <div class="clearfix"></div> 
 
     <el-dialog
-        title="评论" :visible.sync="dialogVisible"
+        title="评论1" :visible.sync="dialogVisible"
         width="40%">
         <div class="quill-editor" 
             :content="content"
