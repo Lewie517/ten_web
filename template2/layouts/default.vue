@@ -5,8 +5,8 @@
         <div class="wrapper"> 
         <div class="sui-navbar"> 
             <div class="navbar-inner"> 
-            <a href="index-logined.html" class="sui-brand"><img src="~/assets/img/asset-logo-black.png" alt="社交" /></a> 
-            <ul class="sui-nav"> 
+            <a href="/" class="sui-brand"><img src="~/assets/img/ten2.png" style="width:122px;height:47px;" alt="社交" /></a> 
+            <ul class="sui-nav" style="padding-left:35px;"> 
                 <router-link tag="li" to="/" active-class="active" exact><a>首页</a></router-link>
                 <router-link tag="li" to="/qa" active-class="active"><a>问答</a></router-link>
                 <router-link tag="li" to="/gathering" active-class="active"><a>活动</a></router-link>
@@ -22,7 +22,7 @@
             </form> 
             <div class="sui-nav pull-right info" v-if="user.name!==undefined"> 
               <li><a href="/manager" class="notice">{{user.name}}</a></li>     
-              <li><a @click="logout" class="notice">退出登陆</a></li>            
+              <li><a @click="logout" class="notice">注销</a></li>            
               <li><a href="/manager"  class="homego"><img :src="user.avatar" width="50px" height="50px" :alt="user.name" /></a></li> 
             </div> 
              <div class="sui-nav pull-right info" v-if="user.name===undefined"> 
