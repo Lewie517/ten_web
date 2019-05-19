@@ -26,7 +26,7 @@
 <script>
 import '~/assets/css/page-sj-qa-submit.css'
 import problemApi from '@/api/problem'
-
+import {getUser} from '@/utils/auth'
 export default {
 
   data () {
@@ -70,7 +70,7 @@ export default {
         this.content = html
       },
       save(){
-          problemApi.save({ content:this.content,title:this.title }  ).then(res=>{
+          problemApi.save({ content:this.content,title:this.title,userid:getUser().userid,name:getUser().name }  ).then(res=>{
               this.$message({
                   message: res.data.message,
                   type: (res.data.flag?'success':'error'),

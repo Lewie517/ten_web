@@ -242,7 +242,8 @@ export default {
         if (response.data.flag) {
           let data = response.data.data;
           // 将返回的数据存入cookie  data.id,
-          setUser( data.token, data.name, data.avatar);
+          console.log(data.name)
+          setUser( data.token, data.name, data.avatar, data.userid);
           location.href = "/manager"; // 登录成功，跳转到用户中心
         } else {
           this.$message({

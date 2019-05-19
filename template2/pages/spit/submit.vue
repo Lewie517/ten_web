@@ -26,6 +26,7 @@
 import '~/assets/css/page-sj-spit-submit.css'
 import spitApi from '@/api/spit'
 import {quillRedefine} from 'vue-quill-editor-upload'
+import {getUser} from '@/utils/auth'
 
 export default {
     data () {
@@ -66,7 +67,7 @@ export default {
         this.content = html
       },
       save(){
-          spitApi.save({ content:this.content }  ).then(res=>{
+          spitApi.save({ content:this.content,userid:getUser().userid,nickname:getUser().name }  ).then(res=>{
               this.$message({
                   message: res.data.message,
                   type: (res.data.flag?'success':'error')

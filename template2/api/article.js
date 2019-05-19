@@ -6,8 +6,11 @@ export default {
 
     getTop(){
         return request({
-            url: `/${group_name}/${api_name}/top`,
-            method: 'get'
+            url: `/${group_name}/${api_name}/search/1/10`,
+            method: 'post',
+            data:{
+                "state":"1"
+            }
         })
     },
     //  /article/article/{articleId}
@@ -23,24 +26,28 @@ export default {
             method: 'get'
         })
     },
-    submitComment(articleid,content){
+    submitComment(articleid,content,userid,name){
         return request({
             url: '/article/comment',
             method: 'post',
             data: {
                 articleid,
-                content
+                content,
+                userid,
+                nickname:name
             }
         })
     },
-    sunmitArticle(title,content,channelid){
+    submitArticle(title,content,channelid,userid,name){
         return request({
             url: '/article/article',
             method: 'post',
             data: {
                 title,
                 content,
-                channelid
+                channelid,
+                userid,
+                nickname:name
             }
         })
     },
@@ -54,8 +61,11 @@ export default {
     // 根据频道ID查文章  /article/channel/{channelId}/{page}/{size}
     findArticleByChannel(channelid,page,size){
         return request({
-            url: `/article/article/${channelid}/${page}/${size}`,
-            method: 'get',
+            url: `/article/article/search/${page}/${size}`,
+            method: 'post',
+            data: {
+                "channelid":channelid
+            }
         })
     },
     //根据条件查询文章列表  /article/article/search/{page}/{size}

@@ -48,7 +48,8 @@
 </template>
 <script>
 import "~/assets/css/page-sj-headline-submit.css";
-import articleApi from "@/api/article";
+import articleApi from "@/api/article"
+import {getUser} from '@/utils/auth'
 export default {
   asyncData(){
     return articleApi.findAllChannel().then(res=>{
@@ -59,7 +60,8 @@ export default {
   },
   methods: {
     submitArticle() {
-      articleApi.sunmitArticle({title:this.title,newContent:this.newContent,channelid:this.channelid}).then(res => {
+      articleApi.submitArticle({title:this.title,newContent:this.newContent,channelid:this.channelid,
+                                userid:getUser().userid,name:getUser().name}).then(res => {
           this.$message({
               message: res.data.message,
               type: res.data.flag ? "success" : "error",
@@ -75,7 +77,9 @@ export default {
     return {
       title: "",
       content: "",
-      channelid:""
+      channelid:"",
+      userid:"",
+      name:""
     }
   }
 }

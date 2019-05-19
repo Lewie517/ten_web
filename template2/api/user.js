@@ -11,7 +11,8 @@ export default {
     register(user,code){
         return request({
             url:`/${group_name}/${api_name}/register/${code}`,
-            method: 'post'
+            method: 'post',
+            data: user
         })
     },
     login(mobile,password){
@@ -24,10 +25,13 @@ export default {
             }
         })
     },
-    info(){
+    info(userid1){
        return request({
            url: `/${group_name}/${api_name}/info`,
-           method: 'get'
+           method: 'get',
+           data:{
+               userid:userid1
+           }
        }) 
     },
     saveinfo(user){

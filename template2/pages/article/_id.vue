@@ -66,6 +66,7 @@
 import "~/assets/css/page-sj-headline-detail.css";
 import articleApi from "@/api/article";
 import axios from 'axios'
+import {getUser} from '@/utils/auth'
 export default {
   asyncData({ params }) {
     return axios.all( [ articleApi.getById(params.id),articleApi.getComment(params.id)  ] ).then( 
@@ -93,7 +94,7 @@ export default {
             })
             return;
         }
-        articleApi.submitComment(articleid,this.content).then(res=>{
+        articleApi.submitComment(articleid,this.content,getUser().userid,getUser().name).then(res=>{
             this.$message({
                 message: res.data.message,
                 type: res.data.flag ? "success" : "error",

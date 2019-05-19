@@ -17,7 +17,7 @@ export default {
     },
     commentlist(id) {
         return request({
-          url: `/${group_name}/${api_name}/commentlist/${id}`,
+          url: `/${group_name}/${api_name}/comment/${id}/1/10`,
           method: 'get'
         })
     },

@@ -124,7 +124,7 @@ export default {
   },
   methods: {
     saveinfo_name() {
-      userApi.saveinfo({ nickname: this.user.nickname }).then(res => {
+      userApi.saveinfo({ nickname: this.user.nickname,userid:getUser().userid }).then(res => {
         this.name_input = false;
       });
     },

@@ -100,6 +100,7 @@ import "~/assets/css/page-sj-qa-detail.css"
 import "~/assets/css/page-sj-headline-detail.css"
 import problemApi from '@/api/problem'
 import axios from 'axios'
+import {getUser} from '@/utils/auth'
 export default {
 
     asyncData({params}){
@@ -123,7 +124,7 @@ export default {
     },
     methods:{
       submitAnswer(){
-        problemApi.saveAnswer({problemid:this.problemid,newAnswer:this.newAnswer}).then(res=>{
+        problemApi.saveAnswer({problemid:this.problemid,newAnswer:this.newAnswer,userid:getUser().userid,name:getUser().name}).then(res=>{
           this.$message({
               message: res.data.message,
               type: (res.data.flag?'success':'error'),
@@ -141,5 +142,5 @@ export default {
       }
     }
 
-};
+}
 </script>

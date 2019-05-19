@@ -92,6 +92,7 @@ import "~/assets/css/page-sj-makeFriends-list.css"
 import userApi from '@/api/user'
 import friendApi from '@/api/friend'
 import axios from 'axios'
+import {getUser} from '@/utils/auth'
 export default {
    /**
     * 查询用户信息,通过token查
@@ -99,7 +100,7 @@ export default {
     *  
     * */ 
    asyncData(){
-       return axios.all([userApi.info(),friendApi.getMessage()]).then(axios.spread(function(user,messages){
+       return axios.all([userApi.info(getUser().userid),friendApi.getMessage()]).then(axios.spread(function(user,messages){
            return {
                user : user.data.data,
                messages : messages.data.data

@@ -14,32 +14,36 @@ export default {
         method: 'get'
       })
     },
-    save(content,title){
+    save(content,title,userid,name){
       return request({
         url: `/${group_name}/${api_name}`,
         method: 'post',
         data: {
           content,
-          title
+          title,
+          userid,
+          nickname:name
         }
       })
     },
     findAnswerById(problemid){
       return request({
-        url:'/answer',
+        url:'/qa/answer',
         method:'get',
         data: {
           problemid
         }
       })
     },
-    saveAnswer(problemid,content){
+    saveAnswer(problemid,content,userid,name){
       return request({
-        url:'/answer',
+        url:'/qa/answer',
         method: 'post',
         data: {
           problemid,
-          content
+          content,
+          userid,
+          nickname:name
         }
       })
     }

@@ -4,7 +4,7 @@ const api_name = 'label'
 export default {
     toplist(){
         return request({
-            url: `/${group_name}/${api_name}/toplist`,
+            url: `/${group_name}/${api_name}`,
             method: 'get'
         })
     }
