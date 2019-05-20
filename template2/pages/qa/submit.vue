@@ -2,7 +2,11 @@
   <div class="wrapper release-tc">
     <div class="release-box">
       <h3>发布问题</h3><br>
-      <input id="appendedPrependedInput" type="text" v-model="title" class="appendedPrependedInput" placeholder="    标题"><br>
+      <input id="appendedPrependedInput" type="text" v-model="title" class="appendedPrependedInput" placeholder="    标题">
+      <select v-model="labelid" style="width:215px;height:36px;" placeholder="标签">
+        <!-- v-for="(item,index) in items" :key="index" :value="item.id" -->
+        <option style="" v-for="(label,index) in labelList" :key="index" :value="label.id" >{{label.labelname}}</option>
+      </select>  
       <div class="editor">
         <div
           class="quill-editor"
@@ -27,7 +31,16 @@
 import '~/assets/css/page-sj-qa-submit.css'
 import problemApi from '@/api/problem'
 import {getUser} from '@/utils/auth'
+import labelApi from '@/api/label'
+
 export default {
+
+  asyncData(){
+    return labelApi.toplist().then( res=>{
+        console.log( JSON.stringify(res.data.data) )
+        return {labelList: res.data.data }
+    })
+  },
 
   data () {
       return {
@@ -70,7 +83,7 @@ export default {
         this.content = html
       },
       save(){
-          problemApi.save({ content:this.content,title:this.title,userid:getUser().userid,name:getUser().name }  ).then(res=>{
+          problemApi.save(this.content,this.title,this.labelid,lagetUser().userid,getUser().name).then(res=>{
               this.$message({
                   message: res.data.message,
                   type: (res.data.flag?'success':'error'),

@@ -30,7 +30,7 @@
                   v-model="content"
                   class="span2 input-fat real-box"
                   placeholder="写下你的评论" @keyup.enter="submitComment()">
-                  <input id="articleid" type="hidden" v-model="articleid" />
+                  <!-- <input id="articleid" type="hidden" v-model="articleid" /> -->
                 <!-- <span class="add-on" @click="login" >提交</span> -->
                 <button type="button" class="add-on" @click="submitComment()" >提交</button>
               </div>
@@ -73,7 +73,8 @@ export default {
         axios.spread( function( article,commentlist ){
             return {
                 article: article.data.data,
-                commentlist: commentlist.data.data.rows
+                commentlist: commentlist.data.data,
+                articleid: params.id
             } 
         })
     )
@@ -81,7 +82,8 @@ export default {
   data(){
       return {
         content: "",
-        articleid: ""
+        articleid: "",
+        commentlist:""
       }
   },
   methods: {
@@ -94,16 +96,17 @@ export default {
             })
             return;
         }
-        articleApi.submitComment(articleid,this.content,getUser().userid,getUser().name).then(res=>{
+        articleApi.submitComment(this.articleid,this.content,getUser().userid,getUser().name).then(res=>{
             this.$message({
                 message: res.data.message,
                 type: res.data.flag ? "success" : "error",
                 showClose: true
             })
             if(res.data.flag){
-                articleApi.getComment(articleid).then(res=>{
-                    this.commentlist=res.data.data.rows
+                articleApi.getComment(this.articleid).then(res=>{
+                    this.commentlist=res.data.data
                 })
+                console.log("成功")
             }
             this.content=''
             

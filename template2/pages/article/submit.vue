@@ -9,7 +9,7 @@
         <form class="sui-form form-horizontal">
           <div class="control-group">
             <div class="controls title-input">
-              <input type="text" id="inputEmail" style="width:570px;border-radius: 5px;" v-model="title" placeholder="标题:不超过30个字符">&nbsp;
+              <input type="text" v-model="title" id="title" style="width:570px;border-radius: 5px;" placeholder="标题:不超过30个字符">&nbsp;
               频道:
               <select v-model="channelid" style="width:106px;height:32px;border-radius: 5px;" >
                 <option style="border-radius: 5px;" v-for="(item,index) in items" :key="index" :value="item.id">{{item.name}}</option>
@@ -60,17 +60,21 @@ export default {
   },
   methods: {
     submitArticle() {
-      articleApi.submitArticle({title:this.title,newContent:this.newContent,channelid:this.channelid,
-                                userid:getUser().userid,name:getUser().name}).then(res => {
+      //{title:this.title,content:this.content,channelid:this.channelid,userid:getUser().userid,nickname:getUser().name}
+      console.log(this.title)
+      articleApi.submitArticle(this.title,this.content,this.channelid,getUser().userid,getUser().name).then(res => {
           this.$message({
               message: res.data.message,
               type: res.data.flag ? "success" : "error",
               showClose: true
           })
+          if(res.data.flag){
+            setTimeout(() => {
+              this.$router.push('/')
+            }, 2000)
+          }
       })
-      setTimeout(() => {
-        this.$router.push('/')
-      }, 2000);
+      
     }
   },
   data() {

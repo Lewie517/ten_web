@@ -10,7 +10,7 @@
               <input
                 type="text"
                 id="inputname"
-                v-model="pojo.nickname"
+                v-model="nickname"
                 placeholder="真实姓名或常用昵称"
                 class="input-xlarge"
               >
@@ -22,7 +22,7 @@
                 <div class="control-group number">
                   <input
                     type="text"
-                    v-model="pojo.mobile"
+                    v-model="mobile"
                     placeholder="仅支持大陆手机号"
                     class="input-xlarge"
                   >
@@ -45,7 +45,7 @@
                     <input
                       type="password"
                       id="inputpassword"
-                      v-model="pojo.password"
+                      v-model="password"
                       placeholder="请输入6-16位密码"
                       class="input-xlarge"
                     >
@@ -118,7 +118,6 @@ import { setUser, getUser } from "@/utils/auth";
 export default {
   data() {
     return {
-      pojo: {}, // 整个表单的实体对象
       code: "", // 验证码
       checked: false, // 是否同意服务条款
       mobile: "", // 手机号码
@@ -132,7 +131,7 @@ export default {
       // 验证手机号
       if (
         !/^((13[0-9])|(15[^4])|(18[0,2,3,5-9])|(17[0-8])|(147))\d{8}$/g.test(
-          this.pojo.mobile
+          this.mobile
         )
       ) {
         this.$message({
@@ -142,7 +141,7 @@ export default {
         });
         return;
       }
-      userApi.sendsms(this.pojo.mobile).then(response => {
+      userApi.sendsms(this.mobile).then(response => {
         this.$message({
           message: response.data.message,
           type: response.data.flag ? "success" : "error",
@@ -162,7 +161,7 @@ export default {
         return;
       }
       // 进行注册
-      userApi.register(this.pojo, this.code).then(response => {
+      userApi.register(this.nickname,this.mobile,this.password, this.code).then(response => {
         this.$message({
           message: response.data.message,
           type: response.data.flag ? "success" : "error",
@@ -170,16 +169,15 @@ export default {
         })
       })
       //清空数据
-      //pojo: {}, // 整个表单的实体对象
       // code: "", // 验证码
       // checked: false, // 是否同意服务条款
       // mobile: "", // 手机号码
       // password: "", // 密码
       // remenberMe: false, // 记住我
       // dialogVisible: false // 弹出框
-      this.pojo.nickname = ""
-      this.pojo.password = ""
-      this.pojo.mobile = ""
+      this.nickname = ""
+      this.password = ""
+      this.mobile = ""
       this.code = ""
       this.checked = false
 
@@ -188,7 +186,7 @@ export default {
     dataValidate() {
       let errMsg = "";
       // 判断昵称
-      if (!this.pojo.nickname) {
+      if (!this.nickname) {
         errMsg = "昵称不能为空";
         return {
           flag: false,
@@ -197,9 +195,9 @@ export default {
       }
       // 判断密码
       if (
-        !this.pojo.password ||
-        this.pojo.password.length <= 6 ||
-        this.pojo.password.length >= 16
+        !this.password ||
+        this.password.length <= 6 ||
+        this.password.length >= 16
       ) {
         errMsg = "密码长度必须在6-16之内";
         return {

@@ -124,7 +124,7 @@ export default {
     return axios.all([articleApi.findArticleByChannel(params.id,1,10),
                     articleApi.findAllChannel()]).then(axios.spread(function(items,channels){
       return {
-        items : items.data.data,
+        items : items.data.data.rows,
         channels : channels.data.data,
         id: params.id
       }
@@ -157,7 +157,14 @@ export default {
     loadMore(){
       this.page++
       articleApi.findArticleByChannel(this.id,this.page,10).then(res=>{
-        this.items = this.items.concat(res.data.data)
+        if(res.data.data.rows.length===0){
+          
+          return;
+        }else{
+          //console.log(res.data.data.total)
+          console.log(res.data.data.rows.length)
+           this.items = this.items.concat(res.data.data)
+        }
       })
     }
     

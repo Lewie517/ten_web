@@ -2,6 +2,7 @@ import Cookies from 'js-cookie'
 const TokenKey='User-Token'
 const NameKey='User-Name'
 const AvatarKey='User-Avatar'
+const UserId='User-Id'
 /*
 export default {
     setUser(token,name,avatar){

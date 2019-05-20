@@ -123,7 +123,7 @@ export default {
 
     return axios.all([articleApi.getTop(),articleApi.findAllChannel()]).then(axios.spread(function(items,channels){
       return {
-        items : items.data.data,
+        items : items.data.data.rows,
         channels : channels.data.data
       }
     }))

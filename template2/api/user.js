@@ -8,11 +8,15 @@ export default {
             method: 'put'
         })
     },
-    register(user,code){
+    register(nickname,mobile,password,code){
         return request({
             url:`/${group_name}/${api_name}/register/${code}`,
             method: 'post',
-            data: user
+            data: {
+                nickname,
+                mobile,
+                password
+            }
         })
     },
     login(mobile,password){

@@ -14,9 +14,9 @@ export default {
         method: 'get'
       })
     },
-    save(content,title,userid,name){
+    save(content,title,labelid,userid,name){
       return request({
-        url: `/${group_name}/${api_name}`,
+        url: `/${group_name}/${api_name}/${labelid}`,
         method: 'post',
         data: {
           content,

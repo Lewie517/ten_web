@@ -9,7 +9,7 @@ export default {
             url: `/${group_name}/${api_name}/search/1/10`,
             method: 'post',
             data:{
-                "state":"1"
+                state:"1"
             }
         })
     },
@@ -38,17 +38,14 @@ export default {
             }
         })
     },
-    submitArticle(title,content,channelid,userid,name){
+    submitArticle(title,content,channelid,userid,nickname){
         return request({
-            url: '/article/article',
+            url: `/article/article`,
             method: 'post',
             data: {
-                title,
-                content,
-                channelid,
-                userid,
-                nickname:name
+                title,content,channelid,userid,nickname
             }
+
         })
     },
     //查询所有频道

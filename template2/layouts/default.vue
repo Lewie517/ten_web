@@ -23,7 +23,7 @@
             <div class="sui-nav pull-right info" v-if="user.name!==undefined"> 
               <li><a href="/manager" class="notice">{{user.name}}</a></li>     
               <li><a @click="logout" class="notice">注销</a></li>            
-              <li><a href="/manager"  class="homego"><img :src="user.avatar" width="50px" height="50px" :alt="user.name" /></a></li> 
+              <li><a href="/manager"  class="homego"><img src="~/assets/img/asset-photo.png" width="50px" height="50px" :alt="user.name" /></a></li> 
             </div> 
              <div class="sui-nav pull-right info" v-if="user.name===undefined"> 
                 <a href="/login" class="sui-btn btn-login">登陆</a>
