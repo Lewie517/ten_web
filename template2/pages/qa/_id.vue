@@ -50,7 +50,7 @@
               <form class="comment-form sui-form form-inline" style="padding-left:11px;">
                 <div class="input-prepend input-append input-box">
                   <input id="appendedPrependedInput" style="height:24px;width:800px;" type="text" v-model="newAnswer" class="span2 input-fat real-box" placeholder="写下你的评论">
-                  <input id="problemid" type="hidden" v-model="problemid" />
+                  <!-- <input id="problemid" type="hidden" v-model="problemid" /> -->
                   <button type="button" style="height:34px;width:66px" class="add-on" @click="submitAnswer()">提交</button>
                 </div>
               </form>
@@ -73,10 +73,10 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="comment-box">
-                  <form class="comment-form">
+                  <!-- <form class="comment-form">
                     <textarea row="1" placeholder="使用评论询问更多信息或提出修改意见，请不要在评论里回答问题"></textarea>
                     <button type="submit" class="sui-btn submit-comment">提交评论</button>
-                  </form>
+                  </form> -->
                   
                 </div>
               </div>
@@ -104,14 +104,12 @@ import {getUser} from '@/utils/auth'
 export default {
 
     asyncData({params}){
-        // return problemApi.searchById(params.id).then(res=>{
-        //     return {item: res.data.data}
-        // })
-        return axios.all( [problemApi.searchById(params.id),problemApi.findAnswerById(params.id)] ).then(
+        return axios.all( [problemApi.searchById(params.id),problemApi.findAnswerById2(params.id)] ).then(
           axios.spread( function(item,answerlist){
             return {
               item: item.data.data,
-              answerlist: answerlist.data.data.rows
+              answerlist: answerlist.data.data,
+              problemid: params.id
             }
           })
         )
@@ -119,27 +117,31 @@ export default {
     data(){
       return{
         problemid:'',
-        newAnswer:''
+        newAnswer:'',
+        params:{},
+        answerlist:[]
       }
     },
     methods:{
       submitAnswer(){
-        problemApi.saveAnswer({problemid:this.problemid,newAnswer:this.newAnswer,userid:getUser().userid,name:getUser().name}).then(res=>{
+        problemApi.saveAnswer(this.problemid,this.newAnswer,getUser().userid,getUser().name).then(res=>{
           this.$message({
               message: res.data.message,
               type: (res.data.flag?'success':'error'),
               showClose: true
           })
-          if(res.data.flag){
-              this.dialogVisible=false //关闭窗口
-              //刷新数据
-              problemApi.findAnswerById(this.problemid).then( res=>{
-                  this.answerlist=res.data.data.rows
-              })
-              this.newAnswer=''
-          }
+          
+          problemApi.findAnswerById2(this.problemid).then( response=>{
+            this.answerlist=response.data.data
+            this.item.reply = this.item.reply+1
+          })
+
         })
+        
+        this.newAnswer=''
+
       }
+
     }
 
 }

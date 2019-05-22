@@ -83,7 +83,7 @@ export default {
         this.content = html
       },
       save(){
-          problemApi.save(this.content,this.title,this.labelid,lagetUser().userid,getUser().name).then(res=>{
+          problemApi.save(this.content,this.title,this.labelid,getUser().userid,getUser().name).then(res=>{
               this.$message({
                   message: res.data.message,
                   type: (res.data.flag?'success':'error'),

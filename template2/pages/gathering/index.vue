@@ -11,10 +11,10 @@
        <div class="activity-inner"> 
         <a href="http://"></a> 
         <div class="img">
-         <a :href="'/gathering/item/'+item.id" target="_blank"><img :src="item.image" alt="" /></a>
+         <a :href="'/gathering/item/'+item.id" target="_blank"><img src="~/assets/img/active2.jpg" alt="" /></a>
         </div> 
         <div class="text"> 
-         <p class="title">{{item.name}}</p> 
+          <a :href="'/gathering/item/'+item.id" target="_blank"><p class="title">{{item.name}}</p></a>
          <div class="fl goin"> 
           <p>时间：{{item.starttime}}</p> 
           <p>城市：{{item.city}}</p> 

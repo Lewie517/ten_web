@@ -69,6 +69,7 @@ import axios from 'axios'
 import {getUser} from '@/utils/auth'
 export default {
   asyncData({ params }) {
+    
     return axios.all( [ articleApi.getById(params.id),articleApi.getComment(params.id)  ] ).then( 
         axios.spread( function( article,commentlist ){
             return {
@@ -76,7 +77,8 @@ export default {
                 commentlist: commentlist.data.data,
                 articleid: params.id
             } 
-        })
+        }),
+        
     )
   },
   data(){
@@ -88,6 +90,10 @@ export default {
   },
   methods: {
     submitComment(){
+      console.log(this.article.comment)
+        if(getUser().name===undefined){
+            this.$router.push('/login')
+        }
         if(this.content==""){
             this.$message({
                 message: "不能为空",
@@ -109,6 +115,7 @@ export default {
                 console.log("成功")
             }
             this.content=''
+            this.article.comment = this.article.comment + 1
             
         })
     }

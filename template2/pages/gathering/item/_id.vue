@@ -3,7 +3,7 @@
    <h1>{{item.name}}</h1> 
    <div class="img-text"> 
     <div class="left-img"> 
-     <img :src="item.image" alt="" /> 
+     <img src="~/assets/img/active3.jpg" alt="" /> 
     </div> 
     <div class="right-txt"> 
      <p>开始时间： {{item.starttime}}</p> 

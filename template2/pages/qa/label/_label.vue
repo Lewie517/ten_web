@@ -14,6 +14,7 @@
          <div class="tab-content"> 
          <div id="new" :class="'tab-pane '+(type=='new'?'active':'')">
           <ul class="detail-list"> 
+            <!-- 循环 -->
            <li class="qa-item" v-for="(item,index) in newlist" :key="index"> 
             <div class="fl record"> 
              <div class="number"> 
@@ -66,7 +67,7 @@
             <div class="fl info"> 
              <div class="question"> 
               <p class="author"><span class="name">{{item.replyname}}</span><span>{{item.replytime}}</span>回答</p> 
-              <p class="title"><a href="./qa-detail.html" target="_blank">{{item.title}}</a></p> 
+              <p class="title"><router-link :to="'/qa/'+item.id">{{item.title}}</router-link></p> 
              </div> 
              <div class="other">  
               <div class="fr brower"> 
@@ -96,7 +97,7 @@
             <div class="fl info"> 
              <div class="question"> 
               <p class="author"><span class="name">{{item.replyname}}</span><span>{{item.replytime}}</span>回答</p> 
-              <p class="title"><a href="./qa-detail.html" target="_blank">{{item.title}}</a></p> 
+              <p class="title"><router-link :to="'/qa/'+item.id">{{item.title}}</router-link></p> 
              </div> 
              <div class="other">  
               <div class="fr brower"> 
@@ -157,8 +158,8 @@ import axios from 'axios'
 export default {
   asyncData({params}){
     return axios.all([problemApi.list('newlist',params.label,1,10),
-      problemApi.list('hotlist',params.label,1,10),
-        problemApi.list('waitlist',params.label,1,10)  ] ).then( axios.spread(function(newlist,hotlist,waitlist ){
+                      problemApi.list('hotlist',params.label,1,10),
+                      problemApi.list('waitlist',params.label,1,10)  ] ).then( axios.spread(function(newlist,hotlist,waitlist ){
           return {
             newlist:newlist.data.data.rows,
             hotlist:hotlist.data.data.rows,

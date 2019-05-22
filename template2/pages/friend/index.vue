@@ -15,7 +15,9 @@
         </p>
         <div class="friend-dating-list">
           <ul class="friends">
-            <li class="friend-item">
+
+            <!-- 开始循环学会列表 -->
+            <li class="friend-item" v-for="(appointment,index) in appointlist" :key="index">
               <div class="fl photo">
                 <span class="cafe-more"></span>
                 <div class="img">
@@ -23,28 +25,28 @@
                 </div>
                 <div class="tag">
                   <span class="tag-cafe cafe">
-                    <i class="fa fa-coffee" aria-hidden="true"></i> 喝咖啡
+                    <i class="fa fa-coffee" aria-hidden="true"></i> {{appointment.topic}}
                   </span>
                 </div>
               </div>
               <div class="fl content">
                 <p class="title">
-                  <span class="name">全栈大牛</span> 邀你一起
-                  <span class="cafe">喝咖啡</span>
-                  <b class="bold">匹配度 96%</b>
+                  <span class="name">{{appointment.nickname}}</span> 邀你一起
+                  <span class="cafe">{{appointment.topic}}</span>
+                  <!-- <b class="bold">匹配度 96%</b> -->
                 </p>
                 <p class="aa">
-                  <span class="money">24岁 | 金牛座 | 教育 | 软件工程师</span>
+                  <span class="money">{{appointment.age}} | {{appointment.study}} | {{appointment.job}}</span>
                 </p>
-                <p class="point">他刚刚分享了XXX文章</p>
-                <p class="desc">推荐理由：你们共同关注PHP、Python 等 5 个标签，都关注 XXX 活动。</p>
+                <p class="point">他刚刚分享了{{appointment.articlecount}}篇文章</p>
+                <p class="desc">交友宣言：{{appointment.content}}。</p>
               </div>
               <div class="fr xy">
                 <ul>
-                  <li>
+                  <li class="likeico" @click="like(appointment.userid,index)">
                     <i class="like sui-icon icon-tb-like"></i>
                   </li>
-                  <li>
+                  <li @click="unlike(appointment.userid)">
                     <i class="close sui-icon icon-tb-roundclose"></i>
                   </li>
                   <li>
@@ -54,201 +56,7 @@
               </div>
               <div class="clearfix"></div>
             </li>
-            <li class="friend-item">
-              <div class="fl photo">
-                <span class="eat-more"></span>
-                <div class="img">
-                  <img src="~/assets/img/widget-dating2.png" alt>
-                </div>
-                <div class="tag">
-                  <span class="tag-cafe eat">
-                    <i class="fa fa-cutlery" aria-hidden="true"></i> 吃饭
-                  </span>
-                </div>
-              </div>
-              <div class="fl content">
-                <p class="title">
-                  <span class="name">全栈大牛</span> 邀你一起
-                  <span class="eat">吃饭</span>
-                  <b class="bold">匹配度 96%</b>
-                </p>
-                <p class="aa">
-                  <span class="money">24岁 | 金牛座 | 教育 | 软件工程师</span>
-                </p>
-                <p class="point">他刚刚分享了XXX文章</p>
-                <p class="desc">推荐理由：你们共同关注PHP、Python 等 5 个标签，都关注 XXX 活动。</p>
-              </div>
-              <div class="fr xy">
-                <ul>
-                  <li>
-                    <i class="like sui-icon icon-tb-like"></i>
-                  </li>
-                  <li>
-                    <i class="close sui-icon icon-tb-roundclose"></i>
-                  </li>
-                  <li>
-                    <i class="message sui-icon icon-tb-comment"></i>
-                  </li>
-                </ul>
-              </div>
-              <div class="clearfix"></div>
-            </li>
-            <li class="friend-item">
-              <div class="fl photo">
-                <span class="travel-more"></span>
-                <div class="img">
-                  <img src="~/assets/img/widget-dating3.png" alt>
-                </div>
-                <div class="tag">
-                  <span class="tag-cafe travel">
-                    <img src="~/assets/img/widget-fa-travel.png" alt> 旅行
-                  </span>
-                </div>
-              </div>
-              <div class="fl content">
-                <p class="title">
-                  <span class="name">全栈大牛</span> 邀你一起
-                  <span class="travel">旅行</span>
-                  <b class="bold">匹配度 96%</b>
-                </p>
-                <p class="aa">
-                  <span class="money">24岁 | 金牛座 | 教育 | 软件工程师</span>
-                </p>
-                <p class="point">他刚刚分享了XXX文章</p>
-                <p class="desc">推荐理由：你们共同关注PHP、Python 等 5 个标签，都关注 XXX 活动。</p>
-              </div>
-              <div class="fr xy">
-                <ul>
-                  <li>
-                    <i class="like sui-icon icon-tb-like"></i>
-                  </li>
-                  <li>
-                    <i class="close sui-icon icon-tb-roundclose"></i>
-                  </li>
-                  <li>
-                    <i class="message sui-icon icon-tb-comment"></i>
-                  </li>
-                </ul>
-              </div>
-              <div class="clearfix"></div>
-            </li>
-            <li class="friend-item">
-              <div class="fl photo">
-                <span class="sing-more"></span>
-                <div class="img">
-                  <img src="~/assets/img/widget-dating3.png" alt>
-                </div>
-                <div class="tag">
-                  <span class="tag-cafe sing">
-                    <img src="~/assets/img/widget-fa-sing.png" alt> K歌
-                  </span>
-                </div>
-              </div>
-              <div class="fl content">
-                <p class="title">
-                  <span class="name">全栈大牛</span> 邀你一起
-                  <span class="sing">K歌</span>
-                  <b class="bold">匹配度 96%</b>
-                </p>
-                <p class="aa">
-                  <span class="money">24岁 | 金牛座 | 教育 | 软件工程师</span>
-                </p>
-                <p class="point">他刚刚分享了XXX文章</p>
-                <p class="desc">推荐理由：你们共同关注PHP、Python 等 5 个标签，都关注 XXX 活动。</p>
-              </div>
-              <div class="fr xy">
-                <ul>
-                  <li>
-                    <i class="like sui-icon icon-tb-like"></i>
-                  </li>
-                  <li>
-                    <i class="close sui-icon icon-tb-roundclose"></i>
-                  </li>
-                  <li>
-                    <i class="message sui-icon icon-tb-comment"></i>
-                  </li>
-                </ul>
-              </div>
-              <div class="clearfix"></div>
-            </li>
-            <li class="friend-item">
-              <div class="fl photo">
-                <span class="movie-more"></span>
-                <div class="img">
-                  <img src="~/assets/img/widget-dating4.png" alt>
-                </div>
-                <div class="tag">
-                  <span class="tag-cafe movie">
-                    <img src="~/assets/img/widget-fa-movie.png" alt> 看电影
-                  </span>
-                </div>
-              </div>
-              <div class="fl content">
-                <p class="title">
-                  <span class="name">全栈大牛</span> 邀你一起
-                  <span class="movie">看电影</span>
-                  <b class="bold">匹配度 96%</b>
-                </p>
-                <p class="aa">
-                  <span class="money">24岁 | 金牛座 | 教育 | 软件工程师</span>
-                </p>
-                <p class="point">他刚刚分享了XXX文章</p>
-                <p class="desc">推荐理由：你们共同关注PHP、Python 等 5 个标签，都关注 XXX 活动。</p>
-              </div>
-              <div class="fr xy">
-                <ul>
-                  <li>
-                    <i class="like sui-icon icon-tb-like"></i>
-                  </li>
-                  <li>
-                    <i class="close sui-icon icon-tb-roundclose"></i>
-                  </li>
-                  <li>
-                    <i class="message sui-icon icon-tb-comment"></i>
-                  </li>
-                </ul>
-              </div>
-              <div class="clearfix"></div>
-            </li>
-            <li class="friend-item">
-              <div class="fl photo">
-                <span class="other-more"></span>
-                <div class="img">
-                  <img src="~/assets/img/widget-dating5.png" alt>
-                </div>
-                <div class="tag">
-                  <span class="tag-cafe other">
-                    <img src="~/assets/img/widget-fa-other.png" alt> 其他
-                  </span>
-                </div>
-              </div>
-              <div class="fl content">
-                <p class="title">
-                  <span class="name">全栈大牛</span> 邀你一起
-                  <span class="other">其他</span>
-                  <b class="bold">匹配度 96%</b>
-                </p>
-                <p class="aa">
-                  <span class="money">24岁 | 金牛座 | 教育 | 软件工程师</span>
-                </p>
-                <p class="point">他刚刚分享了XXX文章</p>
-                <p class="desc">推荐理由：你们共同关注PHP、Python 等 5 个标签，都关注 XXX 活动。</p>
-              </div>
-              <div class="fr xy">
-                <ul>
-                  <li>
-                    <i class="like sui-icon icon-tb-like"></i>
-                  </li>
-                  <li>
-                    <i class="close sui-icon icon-tb-roundclose"></i>
-                  </li>
-                  <li>
-                    <i class="message sui-icon icon-tb-comment"></i>
-                  </li>
-                </ul>
-              </div>
-              <div class="clearfix"></div>
-            </li>
+            
           </ul>
         </div>
       </div>
@@ -259,7 +67,7 @@
               <img src="~/assets/img/widget-photo.png" alt>
               <div class="name-edit">
                 <p>
-                  <span class="name">用户名</span>
+                  <span class="name">{{nickname}}</span>
                   <span class="edit">编辑兴趣资料</span>
                 </p>
                 <p>认证</p>
@@ -289,7 +97,7 @@
           <p>约一约有趣的人，会一会好的时光！</p>
           <a
             class="sui-btn btn-block btn-share"
-            href="~/assets/makeFriends-submit.html"
+            href="/friend/submit"
             target="_blank"
           >发布约会</a>
         </div>
@@ -334,8 +142,54 @@
   </div>
 </template>
 <script>
-import "~/assets/css/page-sj-makeFriends-index.css";
+import "~/assets/css/page-sj-makeFriends-index.css"
+import {getUser} from '@/utils/auth'
+import axios from 'axios'
+import friendApi from '@/api/friend'
 export default {
+  created(){
+        if(getUser().name===undefined){
+            this.$router.push('/login')
+        }
+        
+  },
+  data(){
+    return {
+      nickname:getUser().name,
+      userid:''
 
-};
+    }
+  },
+  asyncData({params}){
+    return axios.all( [friendApi.getAppointment(getUser().userid)] ).then(axios.spread(function(appointlist){
+      return {
+        appointlist:appointlist.data.data
+      }
+    }))
+  },
+  methods:{
+    unlike(userid){//不喜欢
+      friendApi.addFriend(userid,2,getUser().userid).then(response => {
+
+      })
+      friendApi.getAppointment(getUser().userid).then(res => {
+          this.appointlist = res.data.data
+      })
+    },
+    like(userid,index){
+      if (this.appointlist[index].likeico === "color") {
+        this.$message({
+          message: "不可以重复点赞哦~",
+          type: "warning"
+        });
+        return;
+      }
+
+      friendApi.addFriend(userid,1,getUser().userid).then(response => {
+        this.appointlist[index].likeico = "color"
+      })
+    }
+  }
+
+}
 </script>

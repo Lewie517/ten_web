@@ -382,6 +382,10 @@ header {
   cursor: pointer;
 }
 
+.color {
+  color: #e64620;
+}
+
 @media (min-width: 1200px) {
   .tag-item .left-list {
     width: 860px;

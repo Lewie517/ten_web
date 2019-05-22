@@ -26,15 +26,22 @@ export default {
         }
       })
     },
-    findAnswerById(problemid){
+    findAnswerById(id){
       return request({
-        url:'/qa/answer',
-        method:'get',
+        url: '/qa/answer',
+        method: 'get',
         data: {
-          problemid
+          problemid:id
         }
       })
     },
+    findAnswerById2(id){
+      return request({
+        url: `/${group_name}/answer/${id}`,
+        method: 'get'
+      })
+    }
+    ,
     saveAnswer(problemid,content,userid,name){
       return request({
         url:'/qa/answer',
