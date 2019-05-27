@@ -1,6 +1,7 @@
 import request from '@/utils/request'
 const group_name = 'spit'
 const api_name = 'spit'
+import { getUser } from "@/utils/auth"
 export default {
     search(page, size, searchMap) {
         return request({
@@ -23,7 +24,7 @@ export default {
     },
     thumbup(id){
         return request({
-            url: `/${group_name}/${api_name}/thumbup/${id}`,
+            url: `/${group_name}/${api_name}/thumbup/${id}/${getUser().userid}`,
             method: 'put'
         })
     },
@@ -32,6 +33,24 @@ export default {
           url: `/${group_name}/${api_name}`,
           method: 'post',
           data: pojo
+        })
+    },
+    collect(spitid,userid){
+        return request({
+            url: `/${group_name}/collect/${spitid}/${userid}`,
+            method: 'post'
+        })
+    },
+    getCollectArticle(userid){
+        return request({
+            url: `/${group_name}/collect/${userid}`,
+            method: 'get'
+        })
+    },
+    nocollect(spitid,userid){
+        return request({
+            url: `/${group_name}/collect/${spitid}/${userid}`,
+            method: 'delete'
         })
     }
 }

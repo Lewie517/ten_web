@@ -1,6 +1,8 @@
 import request from '@/utils/request'
+import { getUser } from "@/utils/auth"
 const group_name = 'user'
 const api_name = 'user'
+
 export default {
     sendsms(mobile){
         return request({
@@ -29,13 +31,10 @@ export default {
             }
         })
     },
-    info(userid1){
+    info(id){
        return request({
-           url: `/${group_name}/${api_name}/info`,
-           method: 'get',
-           data:{
-               userid:userid1
-           }
+           url: `/${group_name}/${api_name}/info/${id}`,
+           method: 'get'
        }) 
     },
     saveinfo(user){

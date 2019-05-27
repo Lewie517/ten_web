@@ -5,7 +5,7 @@
       <!-- 标题区 --> 
       <div class="detail-tit"> 
        <div class="detail-author"> 
-        <a href="javascript:;">{{pojo.nickname}}</a> 发布 
+        <a href="javascript:;">{{pojo.nickname}}</a> 发布 {{time(pojo.publishtime)}}
        </div> 
        <div class="detail-content"> 
         <p>{{pojo.content}}</p> 
@@ -13,7 +13,7 @@
        </div> 
        <div class="detail-tool"> 
         <ul> 
-         <li><span class="star"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {{pojo.thumbup}}</span></li> 
+         <li><span class="star" @click="thumbup(pojo._id)"><i :class="'fa fa-thumbs-up  '+this.zan" aria-hidden="true"></i> {{pojo.thumbup}}</span></li> 
          <li><a href="#" ><i class="fa fa-share-alt" aria-hidden="true"></i> {{pojo.share}}</a></li> 
          <li><a @click="dialogVisible=true;content=''"><i  class="fa fa-commenting" aria-hidden="true"></i> {{pojo.comment}}</a></li> 
         </ul> 
@@ -31,7 +31,7 @@
           <img src="~/assets/img/widget-widget-photo.png" alt="" /> 
          </div> 
          <div class="item-content"> 
-          <p class="author"><a href="javascript:;">{{item.nickname}}</a> 发布</p> 
+          <p class="author"><a href="javascript:;">{{item.nickname}}</a> 发布于{{time(item.publishtime)}}</p> 
           <p class="content">{{item.content}}</p> 
          </div> 
          <div class="item-thumb"> 
@@ -72,6 +72,8 @@
 import '~/assets/css/page-sj-spit-detail.css'
 import spitApi from '@/api/spit'
 import axios from 'axios'
+import { getUser } from "@/utils/auth";
+import "~/assets/css/page-sj-spit-index.css";
 export default {
     asyncData({params}){
         
@@ -79,7 +81,7 @@ export default {
             axios.spread( function( pojo,commentlist ){
                 return {
                     pojo: pojo.data.data,
-                    commentlist: commentlist.data.data
+                    commentlist: commentlist.data.data.rows
                 } 
             })
          )
@@ -107,7 +109,7 @@ export default {
         this.content = html
       },
       save(){
-          spitApi.save({ content:this.content,parentid:this.pojo.id }  ).then(res=>{
+          spitApi.save({ content:this.content,parentid:this.pojo._id }  ).then(res=>{
               this.$message({
                   message: res.data.message,
                   type: (res.data.flag?'success':'error')
@@ -115,11 +117,42 @@ export default {
               if(res.data.flag){
                   this.dialogVisible=false //关闭窗口
                   //刷新数据
-                  spitApi.commentlist(this.pojo.id ).then( res=>{
-                      this.commentlist=res.data.data
+                  spitApi.commentlist(this.pojo._id ).then( res=>{
+                      this.commentlist=res.data.data.rows
                   })
               }
           })
+      },
+      thumbup(id) {
+        //判断用户是否登陆
+        if (getUser().name === undefined) {
+            this.$message({
+                message: "必须登陆才可以点赞哦~",
+                type: "warning"
+            })
+            return;
+        }
+        if (this.zan === "color") {
+            this.$message({
+                message: "不可以重复点赞哦~",
+                type: "warning"
+            });
+            return;
+        }
+        //this.items[index].zan = "color";
+        spitApi.thumbup(id).then(res => {
+            if (res.data.flag) {
+                this.zan = "color";
+                this.pojo.thumbup++;
+            }
+        })
+      },
+      time(date) {
+        var dateee = new Date(date).toJSON();
+        return new Date(+new Date(dateee) + 8 * 3600 * 1000)
+            .toISOString()
+            .replace(/T/g, " ")
+            .replace(/\.[\d]{3}Z/, "");
       }
     }
 
@@ -127,6 +160,7 @@ export default {
 </script>
 
 <style>
+
 
 .quill-editor {
       min-height: 200px;

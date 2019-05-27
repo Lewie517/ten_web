@@ -11,6 +11,10 @@ html, body {
   font-family: "微软雅黑";
 }
 
+.color {
+  color: #e64620;
+}
+
 .wrapper {
   overflow: hidden;
   position: relative;

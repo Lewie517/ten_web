@@ -69,7 +69,7 @@
                       <span class="authorName">
                         <img src="~/assets/img/widget-photo.png" alt>{{item.nickname}}
                       </span>
-                      <span>{{item.createtime}}</span>
+                      <span>{{time(item.createtime)}}</span>
                     </div>
                     <!-- <div class="fr attention">
                       <span class="attentionText">关注</span>
@@ -102,7 +102,7 @@
           <div class="block-btn">
             <p>今天，有什么好东西要和大家分享么?</p>
             <!-- <a class="sui-btn btn-block btn-share" href="/article/submit" target="_blank" >发布分享</a> -->
-            <button class="sui-btn btn-block btn-share" @click="toShare()">发布分享</button>
+            <button class="sui-btn btn-block btn-share" @click="toShare()">文章发布</button>
           </div>
           
           <!-- <link rel="import" href=".~/assets/.~/assets/modules/ui-modules/footer/footer.html?__inline"> -->
@@ -166,6 +166,13 @@ export default {
            this.items = this.items.concat(res.data.data)
         }
       })
+    },
+    time(date) {
+      var dateee = new Date(date).toJSON();
+      return new Date(+new Date(dateee) + 8 * 3600 * 1000)
+          .toISOString()
+          .replace(/T/g, " ")
+          .replace(/\.[\d]{3}Z/, "");
     }
     
   }

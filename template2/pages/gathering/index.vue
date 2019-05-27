@@ -16,7 +16,7 @@
         <div class="text"> 
           <a :href="'/gathering/item/'+item.id" target="_blank"><p class="title">{{item.name}}</p></a>
          <div class="fl goin"> 
-          <p>时间：{{item.starttime}}</p> 
+          <p>时间：{{time(item.starttime)}}</p> 
           <p>城市：{{item.city}}</p> 
          </div> 
          <div class="fr btn"> 
@@ -52,6 +52,13 @@ export default {
         gatheringApi.search(this.pageNo,12,{state:'1'}).then( res => {
           this.items = this.items.concat( res.data.data.rows )
         })
+      },
+      time(date) {
+        var dateee = new Date(date).toJSON();
+        return new Date(+new Date(dateee) + 8 * 3600 * 1000)
+            .toISOString()
+            .replace(/T/g, " ")
+            .replace(/\.[\d]{3}Z/, "");
       }
     }
 }

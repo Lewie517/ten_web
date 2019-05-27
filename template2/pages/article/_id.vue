@@ -8,9 +8,9 @@
           <div class="operate">
             <span class="fl author">
               <strong>{{article.nickname}}</strong> 发布于
-              <span class="time">{{article.createtime}}</span>
+              <span class="time">{{time(article.createtime)}}</span>
             </span>
-            <!-- <span class="fr ">收藏</span> -->
+            <a href="javacript:void(0);" @click="collect(article.id)"><span class="fr ">收藏</span></a>
           </div>
           <div class="clearfix"></div>
           <div class="content">
@@ -45,7 +45,7 @@
                 <div class="fl text">
                   <p class="author">
                     <span class="name"><strong>{{comment.nickname}}</strong></span> 
-                    发布于&nbsp;&nbsp;{{comment.publishdate}}
+                    发布于&nbsp;&nbsp;{{time(comment.publishdate)}}
                   </p>
                   <p class="word" >
                       {{comment.content}}
@@ -118,6 +118,22 @@ export default {
             this.article.comment = this.article.comment + 1
             
         })
+    },
+    time(date) {
+      var dateee = new Date(date).toJSON();
+      return new Date(+new Date(dateee) + 8 * 3600 * 1000)
+          .toISOString()
+          .replace(/T/g, " ")
+          .replace(/\.[\d]{3}Z/, "");
+    },
+    collect(id){
+      articleApi.collect(id,getUser().userid).then(res => {
+        this.$message({
+            message: res.data.message,
+            type: res.data.flag ? "success" : "error",
+            showClose: true
+        })
+      })
     }
   }
   

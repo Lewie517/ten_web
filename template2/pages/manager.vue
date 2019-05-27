@@ -14,7 +14,7 @@
                 </div> 
                 <!--文字信息--> 
                 <div class="info"> 
-                <h1>Web爱好者<span class="allinfo"><a href="~/assets/person-myfile.html" target="_blank">查看完整档案</a></span></h1> 
+                <h1>{{this.nickname}}<span class="allinfo"><a href="~/assets/person-myfile.html" target="_blank">查看完整档案</a></span></h1> 
                 <ul class="fill"> 
                 <li> <i class="fa fa-map-marker" aria-hidden="true"></i> <span class="edit-item"> 填写现居城市</span> 
                     <form action="" class="sui-form form-inline"> 
@@ -67,7 +67,8 @@
                 <router-link to="/manager/myfocus" tag="li" active-class="active"><a>我的关注</a></router-link>
                 <router-link to="/manager/mycollect" tag="li" active-class="active"><a>我的收藏</a></router-link>
                 <router-link to="/manager/myreaded" tag="li" active-class="active"><a>浏览记录</a></router-link>
-                <router-link to="/manager/account" tag="li" active-class="active"><a>账户设置</a></router-link>            
+                <router-link to="/manager/account" tag="li" active-class="active"><a>账户设置</a></router-link> 
+                <router-link to="/manager/password" tag="li" active-class="active"><a>修改密码</a></router-link>           
                 </ul> 
                 </div> 
             </div> 
@@ -81,10 +82,24 @@
 <script>
 import '~/assets/css/page-sj-person-homepage.css'
 import {getUser} from '@/utils/auth'
+import userApi from '@/api/user'
 export default {
     created(){
         if(getUser().name===undefined){
             this.$router.push('/login')
+        }
+    },
+    // asyncData(){
+    //     return userApi.info(getUser().userid).then( res => {
+    //         return {
+    //             user:res.data.data
+    //         }
+    //     })
+    // },
+    data(){
+        return {
+            user:{},
+            nickname:getUser().name
         }
     }
 }

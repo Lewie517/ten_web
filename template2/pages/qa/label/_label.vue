@@ -41,7 +41,7 @@
              </div> 
              <div class="other">  
               <div class="fr brower"> 
-               <p>浏览量 {{item.visits}} | {{item.createtime}} 来自 <a href="#">{{item.nickname}} </a></p> 
+               <p>浏览量 {{item.visits}} | {{time(item.createtime)}} 来自 <a href="#">{{item.nickname}} </a></p> 
               </div> 
              </div> 
             </div> 
@@ -71,7 +71,7 @@
              </div> 
              <div class="other">  
               <div class="fr brower"> 
-               <p>浏览量 {{item.visits}} | {{item.createtime}} 来自 <a href="#">{{item.nickname}} </a></p> 
+               <p>浏览量 {{item.visits}} | {{time(item.createtime)}} 来自 <a href="#">{{item.nickname}} </a></p> 
               </div> 
              </div> 
             </div> 
@@ -101,7 +101,7 @@
              </div> 
              <div class="other">  
               <div class="fr brower"> 
-               <p>浏览量 {{item.visits}} | {{item.createtime}} 来自 <a href="#">{{item.nickname}} </a></p> 
+               <p>浏览量 {{item.visits}} | {{time(item.createtime)}} 来自 <a href="#">{{item.nickname}} </a></p> 
               </div> 
              </div> 
             </div> 
@@ -196,8 +196,13 @@ export default {
           this.waitlist=this.waitlist.concat( res.data.data.rows )
         })
       }   
-
-
+    },
+    time(date) {
+      var dateee = new Date(date).toJSON();
+      return new Date(+new Date(dateee) + 8 * 3600 * 1000)
+          .toISOString()
+          .replace(/T/g, " ")
+          .replace(/\.[\d]{3}Z/, "");
     }
   }
 }

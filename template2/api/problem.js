@@ -53,6 +53,18 @@ export default {
           nickname:name
         }
       })
+    },
+    findProblemByUserid(userid){
+      return request({
+        url:`/qa/problem/user/${userid}`,
+        method:'get'
+      })
+    },
+    findProblemByAnswer(userid){
+      return request({
+        url:`/qa/answer/user/${userid}`,
+        method:'get'
+      })
     }
 
 }

@@ -72,6 +72,24 @@ export default {
             method: 'post',
             data: searchMap
         })
+    },
+    collect(articleid,userid){
+        return request({
+            url: `/${group_name}/collect/${articleid}/${userid}`,
+            method: 'post'
+        })
+    },
+    getCollectArticle(userid){
+        return request({
+            url: `/${group_name}/collect/${userid}`,
+            method: 'get'
+        })
+    },
+    nocollect(articleid,userid){
+        return request({
+            url: `/${group_name}/collect/${articleid}/${userid}`,
+            method: 'delete'
+        })
     }
 
 

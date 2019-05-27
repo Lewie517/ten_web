@@ -6,7 +6,7 @@
         <p>
           <span class="tag"></span>
           <span class="author">{{item.nickname}}</span>
-          <span>发出提问&nbsp;时间:{{item.createtime}}</span>
+          <span>发出提问&nbsp;时间:{{time(item.createtime)}}</span>
           <!-- <span style="font-size:18px;">{{item.content}}</span> -->
         </p>
       </div>
@@ -33,10 +33,10 @@
             </div>
             <div class="clearfix"></div>
             <div class="operate">
-              <span class="time">1小时前提问</span>
+              <!-- <span class="time">1小时前提问</span>
               <span class="comment">评论</span>
               <span class="edit">编辑</span>
-              <span class="jubao">举报</span>
+              <span class="jubao">举报</span> -->
             </div>
             
           </div>
@@ -60,7 +60,7 @@
                 <p>{{answer.content}}</p>
                 <div class="operate">
                   <div class="tool pull-left">
-                    <span class="time">回答时间:{{answer.createtime}}</span>
+                    <span class="time">回答时间:{{time(answer.createtime)}}</span>
                     <span class="comment">评论</span>
                     <span class="edit">编辑</span>
                     <span class="jubao">举报</span>
@@ -140,6 +140,13 @@ export default {
         
         this.newAnswer=''
 
+      },
+      time(date) {
+        var dateee = new Date(date).toJSON();
+        return new Date(+new Date(dateee) + 8 * 3600 * 1000)
+            .toISOString()
+            .replace(/T/g, " ")
+            .replace(/\.[\d]{3}Z/, "");
       }
 
     }

@@ -6,8 +6,8 @@
      <img src="~/assets/img/active3.jpg" alt="" /> 
     </div> 
     <div class="right-txt"> 
-     <p>开始时间： {{item.starttime}}</p> 
-     <p>结束时间： {{item.endtime}}</p> 
+     <p>开始时间： {{time(item.starttime)}}</p> 
+     <p>结束时间： {{time(item.endtime)}}</p> 
      <p>举办地点： {{item.address}}</p> 
      <p>主办方：{{item.sponsor}}</p> 
      <p>报名截止：{{item.enrolltime}} 
@@ -83,6 +83,15 @@ export default {
         link: [
             {rel:'stylesheet' ,href: 'https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css' }
         ]
+    },
+    methods:{
+      time(date) {
+        var dateee = new Date(date).toJSON();
+        return new Date(+new Date(dateee) + 8 * 3600 * 1000)
+            .toISOString()
+            .replace(/T/g, " ")
+            .replace(/\.[\d]{3}Z/, "");
+      }
     }
 }
 </script>
